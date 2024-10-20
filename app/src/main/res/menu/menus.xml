@@ -3,11 +3,11 @@
     <item
         android:id="@+id/newspaper"
         android:icon="@drawable/newspaper"
-        android:title="Newspaper" />
+        android:title="Breaking News" />
     <item
         android:id="@+id/reelnews"
         android:icon="@drawable/reelnews"
-        android:title="Reel News" />
+        android:title="Daily News" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/profile"

@@ -1,6 +1,5 @@
 package com.example.newsproject;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,10 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaperFragment extends Fragment {
+public class PdfSenderFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArticleAdapter articleAdapter;
     private List<PostModel> articleList;
@@ -39,7 +39,7 @@ public class PaperFragment extends Fragment {
     private FirebaseStorage storage;
     private StorageReference storageRef;
 
-    public PaperFragment() {
+    public PdfSenderFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +48,11 @@ public class PaperFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_paper, container, false);
+        View view = inflater.inflate(R.layout.fragment_pdf_sender, container, false);
 
         // Initialize Firebase Storage
         storage = FirebaseStorage.getInstance();
@@ -62,7 +62,7 @@ public class PaperFragment extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("posts");
 
         // Initialize the RecyclerView
-        recyclerView = view.findViewById(R.id.recycler_view2);
+        recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Initialize the data list and adapter
@@ -73,7 +73,16 @@ public class PaperFragment extends Fragment {
         // Load data from Firebase Realtime Database
         loadDataFromRealtimeDatabase();
 
-
+        // Initialize the FloatingActionButton
+        fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Start PDFadd activity when the FAB is clicked
+                Intent intent = new Intent(getActivity(), PDFadd.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -100,7 +109,7 @@ public class PaperFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.e("PaperFragment", "Error uploading image", e);
+                Log.e("PdfSenderFragment", "Error uploading image", e);
             }
         });
     }
@@ -116,9 +125,9 @@ public class PaperFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Log.d("PaperFragment", "Data stored successfully.");
+                        Log.d("PdfSenderFragment", "Data stored successfully.");
                     } else {
-                        Log.e("PaperFragment", "Error storing data", task.getException());
+                        Log.e("PdfSenderFragment", "Error storing data", task.getException());
                     }
                 }
             });
@@ -145,7 +154,7 @@ public class PaperFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("PaperFragment", "Error loading data: " + databaseError.getMessage());
+                Log.e("PdfSenderFragment", "Error loading data: " + databaseError.getMessage());
             }
         });
     }

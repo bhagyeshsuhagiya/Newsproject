@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.net.URL;
 import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
-
-    private List<NewsResponse.Article> articles;
+    private final List<NewsResponse.Article> articles;
 
     public ViewPagerAdapter(List<NewsResponse.Article> articles) {
         this.articles = articles;
@@ -31,12 +31,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         NewsResponse.Article article = articles.get(position);
-        holder.titleTextView.setText(article.getTitle());
-        holder.descriptionTextView.setText(article.getDescription());
-        holder.link.setText(article.getUrl());
-        Glide.with(holder.itemView.getContext())
-                .load(article.getImage())
-                .into(holder.imageView);
+        holder.bind(article);
     }
 
     @Override
@@ -44,17 +39,29 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         return articles.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView;
-        TextView descriptionTextView,link;
-        ImageView imageView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView titleTextView;
+        private final TextView descriptionTextView;
+        private final ImageView articleImageView;
+        private final TextView link;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.article_title);
             descriptionTextView = itemView.findViewById(R.id.article_description);
-            imageView = itemView.findViewById(R.id.article_image);
+            articleImageView = itemView.findViewById(R.id.article_image);
             link = itemView.findViewById(R.id.link);
+        }
+
+        public void bind(NewsResponse.Article article) {
+            titleTextView.setText(article.getTitle());
+            descriptionTextView.setText(article.getDescription());
+            link.setText(article.getUrl());
+
+            // Use Glide or any other image loading library to load the image from the URL
+            Glide.with(articleImageView.getContext())
+                    .load(article.getImage())
+                    .into(articleImageView);
         }
     }
 }

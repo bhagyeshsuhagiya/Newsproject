@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CE827F7F"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UserDataShowFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Total number of user in app"
+    android:textColor="@color/cardview_light_background"
+    android:textSize="20dp"
+    android:layout_margin="5dp"
+    android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/total_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/cardview_light_background"
+        android:text="34"
+        android:textColor="#000000"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</FrameLayout>

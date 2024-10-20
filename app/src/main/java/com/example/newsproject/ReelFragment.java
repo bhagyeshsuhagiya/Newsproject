@@ -29,9 +29,9 @@ public class ReelFragment extends Fragment {
     private List<NewsResponse.Article> articles;
 
     // Category, language, and country can be set dynamically
-    private String category = "general"; // Default category
-    private String language = "hi"; // Hindi
-    private String country = "in"; // India
+    private String category = "general";
+    private String language = "en";
+    private String country = "in"; // 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

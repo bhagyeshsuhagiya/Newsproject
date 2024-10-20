@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1E88E5</color> <!-- A strong blue -->
-    <color name="colorPrimaryDark">#1565C0</color> <!-- A darker shade of the primary color -->
-    <color name="colorAccent">#FF7043</color> <!-- A vibrant orange for accents -->
+    <color name="colorPrimary">#000000</color> <!-- A strong blue -->
+    <color name="colorPrimaryDark">#000000</color> <!-- A darker shade of the primary color -->
+    <color name="colorAccent">#000000</color> <!-- A vibrant orange for accents -->
 </resources>
